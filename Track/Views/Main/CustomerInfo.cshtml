@@ -1,0 +1,106 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model CustomerClass
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Orders</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="CustomerForm">
+                    <input id="ID1" value="0" hidden type="number"/>
+                   <div class="form-group">
+                        <label>Name</label>
+                        <input id="Name1" type="text" class="form-control" placeholder="Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input id="phoneNumber" type="number" class="form-control" placeholder="Phone Number">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Province</label>
+                        <select id="ProvinceOption" class="form-select">
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label>District</label>
+                        <select id="DistrictOption" class="form-select"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Local Body</label>
+                        <select id="LocalBodyOption" class="form-select"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input id="IAddress" type="text" class="form-control" placeholder="Address">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<partial name="_SearchBar" />
+
+<table class="table">
+    <thead>
+        <tr class="text-center">
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                Province
+            </th>
+            <th>
+                District
+            </th>
+            <th>
+                Local Body
+            </th>
+            <th>
+                Address
+            </th>
+            <th colspan="2">
+                <button type="button" class="btn btn-primary" onclick=clearIt() data-toggle="modal" data-target="#exampleModal"><i class="bi bi-file-earmark-plus-fill"></i>  Add</button>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="t-body">
+
+    </tbody>   
+</table>
+
+@section Scripts
+{
+    <script src="~/js/Autocomplete.js"></script>
+    <script src="~/js/Customer.js"></script>
+    <script src="~/js/Customerform.js"></script>
+}
+

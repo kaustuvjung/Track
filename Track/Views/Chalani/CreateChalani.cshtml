@@ -1,0 +1,183 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ChalaniClass
+
+
+<div class="modal fade" id="CustomerexampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Customers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="CustomerForm">
+                    <input id="ID1" value="0" hidden type="number" />
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input id="Name1" type="text" class="form-control" placeholder="Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input id="phoneNumber" type="number" class="form-control" placeholder="Phone Number">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Province</label>
+                        <select id="ProvinceOption" class="form-select">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>District</label>
+                        <select id="DistrictOption" class="form-select"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Local Body</label>
+                        <select id="LocalBodyOption" class="form-select"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input id="IAddress" type="text" class="form-control" placeholder="Address">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="exampleModal" data-backdrop="false" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="AddProduct">
+                    <input value="0" hidden type="number" id="ID" />
+                    <div class="form-group">
+                        <label for="ProductName">Product</label>
+                        <select asp-items="@ViewBag.ProductName" id="ProductName" class="form-select">
+                            <option disabled selected value="0">--select product--</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Quantity">Quantity</label>
+                        <input type="number" class="form-control" id="Quantity" placeholder="Quantity">
+                    </div>
+                    <div id="tada">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<form id="Client" method="post" asp-controller="Chalani" asp-action="AddChalani">
+    @{
+        int? customer_id;
+        @try
+        {
+            customer_id = Model.Customer_id;
+        }
+        catch (Exception ex)
+        {
+            customer_id = 0;
+        }
+    }
+    <input hidden type="number" id="cusSelected" value="@customer_id" />
+    <input asp-for="@Model.Id" id="MainId" hidden/>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="ClientName">Customer Name</label>
+            <select asp-for="@Model.Customer_id" id="ClientName" class="form-select">
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="ClientNumber">Customer Number</label>
+            <select disabled id="ClientNumber" class="form-select">
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="Address">Address</label>
+            <select disabled id="Address" class="form-select">
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="SDate">Date</label>
+            <input type="date" class="form-control" asp-for="@Model.Send" id="SDate" placeholder="Send Date" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="PhoneNumber">Phone Number</label>
+            <input type="number" class="form-control" asp-for="@Model.PhoneNumber" id="PhoneNumber" placeholder="Phone Number" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="Remarks">Remarks</label>
+            <input type="text" class="form-control" asp-for="@Model.Remarks" id="Remarks" placeholder="Remarks" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4 d-flex justify-content-left align-items-end">
+
+            <button class="btn btn-primary" type="submit"><i class="bi bi-file-bar-graph-fill"></i> Generate Report</button>
+        </div>
+        <div class="form-group col-md-4 d-flex justify-content-left align-items-end">
+            <a class="btn btn-info" data-toggle="modal" data-target="#CustomerexampleModal">
+                <i class="bi bi-person-add"></i> Add Customer
+            </a>
+        </div>
+
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th colspan="2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="Add()">
+                    <i class="bi bi-file-earmark-plus-fill"></i> Add
+                </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="t-body">
+    </tbody>
+</table>
+@section Scripts
+{
+    <script src="~/js/Customerform.js"></script>
+    <script src="~/js/CreateChalani.js"></script>
+}

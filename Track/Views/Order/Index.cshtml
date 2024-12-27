@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<partial name="_SearchBar" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Arival
+            </th>
+            <th>
+                Invoice No
+            </th>
+
+            <th>
+                Vendor Name
+            </th>
+            <th colspan="3" class="text-center">
+                <a class="btn btn-primary" asp-action="newOrder">
+                    <i class="bi bi-file-earmark-plus-fill"></i> Add
+                </a>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody id="t-body">
+
+    </tbody>
+
+</table>
+
+@section Scripts
+{
+    <script src="~/js/Autocomplete.js"></script>
+    <script src="~/js/order.js"></script>
+}

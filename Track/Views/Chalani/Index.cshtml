@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<partial name="_SearchBar" />
+<from>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="From">From:</label>
+            <input type="date" id="From" class="form-control" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="TOo">To: </label>
+            <input type="date" id="TOo" class="form-control" />
+        </div>
+
+        <div class="form-group col-md-1">
+            <button class="btn btn-primary" onclick="dateSearch()" style="position:absolute; bottom:0;"><i class="bi bi-search"></i></button>
+        </div>
+    </div>
+
+</from>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Date
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                PhoneNumber
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Edit
+            </th>
+            <th>
+                <a class="btn btn-primary" asp-action="CreateChalani">Add</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="t-body">
+    </tbody>
+</table>
+@section Scripts {
+    <script src="~/js/Autocomplete.js"></script>
+    <script src="~/js/chalaniIndex.js"></script>
+}

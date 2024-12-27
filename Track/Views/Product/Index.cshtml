@@ -1,0 +1,110 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ProductClass
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Orders</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group" style="margin-bottom:10px">
+                        <label asp-for="@Model.ImgUrl"></label>
+                        <input type="file" name="file" class="form-control" />
+                    </div>
+                    <input hidden asp-for="@Model.Id" id="id" class="form-control" placeholder="Id" value="0">
+                    <div class="form-group">
+                        <label asp-for="@Model.Name"></label>
+                        <input asp-for="@Model.Name" class="form-control" placeholder="Name" id="Name">
+                        <span asp-validation-for="@Model.Name"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Description"></label>
+                        <input asp-for="@Model.Description" class="form-control" placeholder="Name" id="Description">
+                        <span asp-validation-for="@Model.Description"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Modal"></label>
+                        <input asp-for="@Model.Modal" class="form-control" placeholder="Name" id="Description">
+                        <span asp-validation-for="@Model.Modal"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Category"></label>
+                        <select asp-for="@Model.Category" asp-items="@ViewBag.CatagoryType" class="form-control" id="C-at">
+                            <option disabled selected>--select Catagory--</option>
+                        </select>
+                        <span asp-validation-for="@Model.Category"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.company"></label>
+                        <select asp-for="@Model.company" asp-items="@ViewBag.CompanyName" class="form-control" id="Company">
+                            <option disabled selected>--Select Company--</option>
+                        </select>
+                        <span asp-validation-for="@Model.company"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<partial name="_SearchBar" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Company
+            </th>
+            <th>
+                In Stock
+            </th>
+            <th>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    <i class="bi bi-file-earmark-plus-fill"></i> Add
+                </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="t-body">
+
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script src="~/js/Autocomplete.js"></script>
+    <script src="~/js/Product.js"></script>
+}

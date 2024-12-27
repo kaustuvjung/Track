@@ -1,0 +1,114 @@
+﻿    @*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model int
+<link rel="stylesheet" href="~/css/AutoComplete.css" />
+
+<form autocomplete="off" id="form-search">
+
+    <div class="form-group">
+        <label>Search By</label>
+        <select id="Search">
+            <option selected value="0" disabled>--select Option--</option>
+            <option value="1">Serial_no</option>
+            <option value="2">Product Name</option>
+            <option value="3">Customer Name</option>
+            <option value="4">Order no</option>
+        </select>
+    </div>
+
+    <div class="autocomplete" style="width:300px;">
+        <input id="myInput" type="text" name="myCountry" placeholder="Search Here">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Serial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="myForm">
+                    <div class="form-group">
+                        <label>Product Stock No</label>
+                        <input id="Stock_NO" value="0" class="form-control" placeholder="Name" type="number" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Serial Number</label>
+                        <input id="serial_no"type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Customer</label>
+                        <select asp-items="@ViewBag.Customer_id" id="Customer" class="form-select">
+                            <option selected disabled value="0">--select Customer--</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-check-label" for="isDamaged">
+                            Product is Damaged? :
+                        </label>
+                        <input class="form-check-input ml-3" type="checkbox" name="flexRadioDefault" id="idDamaged">
+                    </div>
+                    <input id="Dmessage" type="text" hidden />
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<input hidden id="Value-id" value="@Model" />
+<table class="table" id="tblData">
+    <thead>
+        <tr>
+            <th>
+                Model no
+            </th>
+            <th>
+                Serial_no
+            </th>
+            <th>
+                Product_name
+            </th>
+            <th>
+                inStock
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Customer Id
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th colspan="2" class="text-center">
+                @* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-file-earmark-plus-fill"></i> Add</button> *@
+                Options
+            </th>
+        </tr>
+    </thead>
+    <tbody id="t-body">
+
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script src="~/js/Autocomplete.js"></script>
+    <script src="~/js/AddSerial.js"></script>
+}

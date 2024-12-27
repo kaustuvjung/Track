@@ -1,0 +1,220 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+}
+
+@model BillClass
+
+<div class="modal fade" id="ServiceModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <from id="service">
+                    <input hidden id="billS_id" type="number" value="0"/>
+                    <div class="form-group">
+                        <lable for="NService">Service: </lable>
+                        <input type="text" class="form-control" id="NService" />
+                    </div>
+                    <div class="form-group">
+                        <label for="rate">Rate</label>
+                        <input type="number" class="form-control" id="rate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" />
+                    </div>
+                    <button onclick=onClickme() class="btn btn-primary">Submit</button>
+                </from>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CustomerexampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Customers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="CustomerForm">
+                    <input id="ID1" value="0" hidden type="number" />
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input id="Name1" type="text" class="form-control" placeholder="Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input id="phoneNumber" type="number" class="form-control" placeholder="Phone Number">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Province</label>
+                        <select id="ProvinceOption" class="form-select">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>District</label>
+                        <select id="DistrictOption" class="form-select"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Local Body</label>
+                        <select id="LocalBodyOption" class="form-select"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input id="IAddress" type="text" class="form-control" placeholder="Address">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="AddProduct">
+                    <input value="0" hidden type="number" id="ID" />
+                    <div class="form-group">
+                        <label for="ProductName">Product</label>
+                        <select asp-items="@ViewBag.ProductName"  id="ProductName" class="form-select">
+                            <option disabled selected value="0">--select product--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Rate">Rate</label>
+                        <input type="number" class="form-control" id="Rate" placeholder="Rate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Quantity">Quantity</label>
+                        <input type="number" class="form-control" id="Quantity" placeholder="Quantity">
+                    </div>
+                    <div id="tada">
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<form id="Client" method="post" asp-controller="bill" asp-action="Addbill">
+
+    <div class="form-row">
+        <input hidden asp-for="@Model.Id" id="Bill_id"/>
+        <div class="form-group col-md-4">
+            <label for="ClientName">Customer Name</label>
+            <select asp-for="@Model.Customer_id" id="ClientName" class="form-select">
+
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="ClientNumber">Customer Number</label>
+            <select disabled id="ClientNumber" class="form-select">
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="Description">Bill no</label>
+            <input type="text" class="form-control" id="Description" asp-for="@Model.Billno" placeholder="Bill No" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="Description">Date</label>
+            <input type="date" class="form-control" asp-for="@Model.Date" id="BDate"  placeholder="Bill Date" />
+        </div>
+
+        <input asp-for="@Model.total" hidden id="sub-total" />
+        <div class="form-group col-md-4 d-flex justify-content-center align-items-end">
+            
+            <button class="btn btn-primary" type="submit"><i class="bi bi-file-bar-graph-fill"></i> Generate Bill</button>
+        </div>
+        <div class="form-group col-md-4 d-flex justify-content-center align-items-end">
+            <a class="btn btn-info" data-toggle="modal" data-target="#CustomerexampleModal">
+                <i class="bi bi-person-add"></i> Add Customer
+            </a>
+        </div>
+
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Rate
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Total
+        </th>
+        <th colspan="2">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="Add()">
+                <i class="bi bi-file-earmark-plus-fill"></i> Add P
+            </button>
+                <button type="button" class="btn btn-primary" onclick="AddService()" data-toggle="modal" data-target="#ServiceModalLong">
+                    <i class="bi bi-file-earmark-plus-fill"></i> Add S
+                </button>
+        </th>
+    </tr>
+    </thead>
+    <tbody id="t-body">
+
+    </tbody>
+</table>
+
+
+
+
+@section Scripts
+{
+    <script src="~/js/Customerform.js"></script>
+    <script src="~/js/CreateBill.js"></script>
+}

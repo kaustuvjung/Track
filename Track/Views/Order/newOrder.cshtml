@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="AddProduct">
+                        <input value="0" hidden type="number" id="ID"/>
+                        <div class="form-group">
+                            <label for="ProductName">Product</label>
+                        <select asp-items="@ViewBag.Products" id="ProductName"  class="form-select">
+                                <option disabled selected value="0">--select product--</option>
+                        </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Quantity">Quantity</label>
+                            <input type="number" class="form-control" id="Quantity" placeholder="Quantity">
+                        </div>
+                        <div id="tada">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<form id="s-form">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="Date">Date</label>
+      <input type="date" class="form-control" id="Date" placeholder="Date">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="Invoice">Invoice Number</label>
+      <input type="text" class="form-control" id="Invoice" placeholder="Invoice Number">
+    </div>
+        <div class="form-group col-md-4">
+            <label for="vendor">Vendor</label>
+            <select asp-items="@ViewBag.Vendor" class="form-select" id="vendor_id">
+                <option selected diabled>--Select Vendor--</option>
+            </select>
+        </div>
+  </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                S.N
+            </th>
+            <th>
+                Product
+            </th>
+            <th>
+                Quality
+            </th>
+            <th>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <i class="bi bi-file-earmark-plus-fill"></i> Add
+            </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="t-body">
+
+    </tbody>
+</table>
+<a class="btn btn-primary" onclick="AddOrder()">Submit</a>
+
+@section Scripts
+{
+    <script src="~/js/newOrder.js"></script>
+}

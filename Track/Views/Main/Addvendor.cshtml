@@ -1,0 +1,90 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model VendorClass
+
+<link rel="stylesheet" href="~/css/AutoComplete.css" />
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Vendor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="myForm">
+                    <input hidden asp-for="@Model.Id" id="ID" class="form-control" placeholder="Id" value="0">
+                    <div class="form-group">
+                        <label asp-for="@Model.Name"></label>
+                        <input id="Name" asp-for="@Model.Name" class="form-control" placeholder="Name">
+                        <span asp-validation-for="@Model.Name"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Description"></label>
+                        <input id="Description" asp-for="@Model.Description" class="form-control" placeholder="Description">
+                        <span asp-validation-for="@Model.Description"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.PhoneNumber"></label>
+                        <input id="Phonenumber" asp-for="@Model.PhoneNumber" class="form-control" placeholder="Phone Number">
+                        <span asp-validation-for="@Model.PhoneNumber"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form autocomplete="off" id="form-search">
+
+    <div class="autocomplete" style="width:50%;">
+        <input id="myInput" type="text" name="myCountry" placeholder="Text Here">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<br />
+
+<table class="table">
+    <thead>
+        <tr class="text-center">
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th colspan="2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-file-earmark-plus-fill"></i>  Add</button>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="t-body">
+
+    </tbody>   
+</table>
+
+@section Scripts
+{
+    <script src="~/js/Autocomplete.js"></script>
+    <script src="~/js/Vendor.js"></script>
+}
+

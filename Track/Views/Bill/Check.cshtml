@@ -1,0 +1,215 @@
+﻿    @*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model BillClass
+<div class="modal fade" id="PaymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Payment </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="PaymentForm">
+                    <div class="form-group">
+                        <label for="Pmethod">Method</label>
+                        <select id="Pmethod" class="form-select">
+                            <option disabled selected>--select option--</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Cheque">Cheque</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="E-wallet">E-Wallet</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="PDate">Date</label>
+                        <input id="PDate" type="date" class="form-control" placeholder="yyyy-mm-dd"/>
+                    </div>
+                    <div class="from-group">
+                        <label for="PAmount">Amount</label>
+                        <input id="PAmount" class="form-control" type="number"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="Commission">Commission</label>
+                        <input id="Commission" type="number" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="sold_By">Sold by</label>
+                        <input type="text" id="sold_By" class="form-control"/>
+                    </div>
+                    <input id="Bid" hidden asp-for=@Model.Id/>
+                    <br />
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Serial no </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Serial No
+                            </th>
+                            <th>
+                                Index no
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tm-body">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="VPaymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Payment History</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="Toprint">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Date 
+                            </th>
+                            <th>
+                                Method
+                            </th>
+                            <th>
+                                Amount
+                            </th>
+                            <th>
+                                Commission
+                            </th>
+                            <th>
+                                Commission %
+                            </th>
+                            <th>
+                                Sold By
+                            </th>
+                            <th>
+                                Delete
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="Pd-body">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" onclick="printThisq()">Print</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="Client" method="post" asp-controller="bill" asp-action="Addbill">
+
+    <div class="form-row">
+        <input hidden value="@Model.Id" id="ID"/>
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Customer.Name">Customer Name</label>
+            <input asp-for="@Model.Customer.Name" disabled class="form-control"/>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="ClientNumber">Customer Number</label>
+            <input asp-for="@Model.Customer.PhoneNumber" disabled class="form-control"/>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="Description">Description</label>
+            <input type="text" class="form-control" id="Description" disabled asp-for="@Model.Billno" placeholder="Description" />
+        </div>
+    </div>
+    <div class="form-row">
+
+        <div class="form-group col-md-4">
+            <label for="Payment">Received Payment</label>
+            <input class="form-control" id="Payment" asp-for="@Model.payment" type="number" placeholder="Payment Amount" />
+        </div>
+
+
+        <div class="form-group col-md-4">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#PaymentModal" style="position:absolute;bottom:0;left:0;">
+                Add Payment
+            </button>
+        </div>
+
+        <div class="form-group col-md-4">
+            <button type="button" class="btn btn-primary" data-toggle="modal" onclick=PView() data-target="#VPaymentModal" style="position:absolute;bottom:0;left:0;">
+                View Payment
+            </button>
+        </div>
+
+        <input asp-for="@Model.total" hidden id="sub-total" />
+    </div>
+</form>
+
+<div id="billPrint">
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:20%">
+                    Product Name
+                </th>
+                <th style="width:20%">
+                    Rate
+                </th>
+                <th style="width:20%">
+                    Quantity
+                </th>
+                <th style="width:20%">
+                    Total
+                </th>
+                <th class="no-print" style="width:20%">
+                    View
+                </th>
+            </tr>
+        </thead>
+        <tbody id="t-body">
+        </tbody>
+    </table>
+</div>
+
+<button class="btn btn-primary" onclick="printBill()">Print Bill</button>
+@section Scripts
+{
+    <script src="~/js/printThis.js"></script>
+    <script src="~/js/checkBill.js"></script>
+}

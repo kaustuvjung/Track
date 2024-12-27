@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model OrderClass
+
+<form>
+    <div class="form-row">
+        <input hidden asp-for="@Model.Id" id="ID"/>
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Arival"></label>
+            <input type="date" class="form-control" asp-for="@Model.Arival" disabled placeholder="Date">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="Invoice">Invoice Number</label>
+            <input type="text" class="form-control" id="Invoice" placeholder="Invoice Number" disabled asp-for="@Model.Invoice_no">
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.vendor.Name"></label>
+            <input type="text" class="form-control" id="Vendor" placeholder="Vendor" disabled asp-for="@Model.vendor.Name">
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                S.N
+            </th>
+            <th>
+                Product
+            </th>
+            <th>
+                Quality
+            </th>
+        </tr>
+    </thead>
+    <tbody id="t-body">
+    </tbody>
+</table>
+@section Scripts
+{
+    <script src="~/js/ViewOrder.js"></script>
+}
